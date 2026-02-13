@@ -1,0 +1,130 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --accent-color: #646cff;
+  --card-bg: #f4f4f9;
+}
+
+.dark {
+  --bg-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --accent-color: #bb86fc;
+  --card-bg: #2d2d2d;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+.container {
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.filter-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.search-bar, .category-select, .category-tag-select, .input-group input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: var(--card-bg);
+  color: var(--text-color);
+  outline: none;
+}
+
+.search-bar { flex: 2; }
+.category-select { flex: 1; }
+.input-group input { flex: 3; }
+
+.header-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.pdf-btn {
+  background-color: #27ae60;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.note-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.note-item {
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.General { background: #888; color: white; }
+.Work { background: #3498db; color: white; }
+.Health { background: #2ecc71; color: white; }
+.Love { background: #e74c3c; color: white; }
+
+.border-Work { border-left: 6px solid #3498db; }
+.border-Health { border-left: 6px solid #2ecc71; }
+.border-Love { border-left: 6px solid #e74c3c; }
+.border-General { border-left: 6px solid #888; }
+
+.actions button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 10px;
+  color: var(--text-color);
+}
