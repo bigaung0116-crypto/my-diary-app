@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import jsPDF from 'jspdf'
-import autoTable from 'jspdf-autotable' // ဒီလိုမျိုး အမည်ပေးပြီး ခေါ်လိုက်ပါ
+import autoTable from 'jspdf-autotable'
 import './App.css'
+
 function App() {
   const [notes, setNotes] = useState(() => {
     const saved = localStorage.getItem("my-pro-notes");
@@ -47,11 +48,9 @@ function App() {
     setEditId(note.id);
   };
 
-  // PDF ထုတ်မရတဲ့ပြဿနာကို ရှင်းထားတဲ့ Function
   const downloadPDF = () => {
     try {
       const doc = new jsPDF();
-      
       doc.setFontSize(18);
       doc.text("My Personal Diary", 14, 20);
       
@@ -63,7 +62,6 @@ function App() {
       const tableColumn = ["Date", "Category", "Content"];
       const tableRows = notes.map(note => [note.date, note.category, note.text]);
 
-      // အရင်က doc.autoTable အစား အခုလို autoTable(doc, ...) လို့ ရေးပါ
       autoTable(doc, {
         head: [tableColumn],
         body: tableRows,
@@ -73,7 +71,6 @@ function App() {
       });
 
       doc.save("diary.pdf");
-
     } catch (err) {
       console.error("PDF Logic Error:", err);
       alert("PDF Error: " + err.message);
@@ -99,10 +96,13 @@ function App() {
           </div>
         </header>
 
-        <div className="filter-section">
+        {/* Search and Filter Section */}
+        <div className="input-container">
           <input 
-            className="search-bar"
-            placeholder="ရှာဖွေရန်..."
+            type="text" 
+            placeholder="ရှာဖွေရန်..." 
+            className="search-input"
+            value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <select onChange={(e) => setFilterCategory(e.target.value)} className="category-select">
@@ -114,21 +114,26 @@ function App() {
           </select>
         </div>
 
+        {/* Note Input Section */}
         <div className="input-group">
-          <input 
+          <textarea 
+            className="main-input"
             value={inputValue} 
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={editId ? "ပြင်ဆင်ရန်..." : "မှတ်စုအသစ်..."}
           />
-          <select value={category} onChange={(e) => setCategory(e.target.value)} className="category-tag-select">
-            <option value="General">General</option>
-            <option value="Work">Work</option>
-            <option value="Health">Health</option>
-            <option value="Love">Love</option>
-          </select>
-          <button className="add-btn" onClick={addNote}>{editId ? "Update" : "Add"}</button>
+          <div className="input-actions">
+            <select value={category} onChange={(e) => setCategory(e.target.value)} className="category-tag-select">
+              <option value="General">General</option>
+              <option value="Work">Work</option>
+              <option value="Health">Health</option>
+              <option value="Love">Love</option>
+            </select>
+            <button className="add-btn" onClick={addNote}>{editId ? "Update" : "Add"}</button>
+          </div>
         </div>
 
+        {/* Note List Section */}
         <div className="note-list">
           {filteredNotes.length === 0 ? <p style={{textAlign: 'center', opacity: 0.5}}>မှတ်စု မတွေ့ပါ</p> : 
             filteredNotes.map((note) => (
